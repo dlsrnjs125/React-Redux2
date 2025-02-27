@@ -1,7 +1,12 @@
 # React-Practice2
 react Axios를 활용한 Api 테스트
+Django-React-RESTApi Project
 
-POST를 통해 body에 데이터를 보내기
+## UserList
+Django에 name, email, age를 get을 통해 데이터를 받아온다
+
+## BookList
+Django에  title, author, publisher, price를 get을 통해 데이터를 받아온다
 
 # UserCreate
-데이터베이스에 name, email, age를 입력받아 POST를 통해 데이터 생성
+Django에 name, email, age를 입력받아 POST를 통해 데이터 생성
