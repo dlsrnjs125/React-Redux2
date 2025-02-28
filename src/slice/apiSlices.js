@@ -53,3 +53,18 @@ export const fetchUserCreateThunk = createAsyncThunk("userCreate/fetchUserCreate
   return response.data;
 });
 
+
+
+// User name Search api
+export const fetchUserSearchThunk = createAsyncThunk("userSearch/fetchUserSearchThunk", async ({ searchField, searchValue }) => {
+  let response;
+    
+    if (searchField === 'age') {
+      response = await api.get(`/users/age_gte/${searchValue}/`);
+    } else {
+      response = await api.get(`/users/name/${searchValue}/`);
+    }
+  // const response = await api.get(`/users/name/${name}/`);
+  console.log("response.data", response.data);
+  return response.data;
+});
