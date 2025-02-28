@@ -1,11 +1,11 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchUserCreateThunk } from '../slice/apiSlices';
 
 // slice에서 받은 api에 대해서 데이터를 저장하는 곳
 const userCreateService = createSlice({
     name: "userCreate",
     initialState: {
-        userCreate: [],
+      userCreate: [],
       loading: false,
       error: null,
     },

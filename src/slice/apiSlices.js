@@ -68,3 +68,18 @@ export const fetchUserSearchThunk = createAsyncThunk("userSearch/fetchUserSearch
   console.log("response.data", response.data);
   return response.data;
 });
+
+// User Delete API
+export const fetchUserDeleteThunk = createAsyncThunk(
+  "userDelete/fetchUserDeleteThunk",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/users/delete/${id}/`);
+      console.log("User deleted:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      return rejectWithValue(error.response?.data || "Failed to delete user");
+    }
+  }
+);
