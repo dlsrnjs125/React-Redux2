@@ -21,7 +21,7 @@ export const userSlice = createAsyncThunk("users/fetchUsers", async () => {
   }
 });
 
-// User List api
+// Book List api
 export const bookSlice = createAsyncThunk("books/fetchBooks", async () => {
   try {
     const response = await api.get("/books/");
@@ -33,12 +33,23 @@ export const bookSlice = createAsyncThunk("books/fetchBooks", async () => {
   }
 });
 
+// Order List api
+export const orderSlice = createAsyncThunk("orders/fetchOredrs", async () => {
+  try {
+    const response = await api.get("/orders/");
+    console.log("response.data", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+});
+
 
 // User Create api
 export const fetchUserCreateThunk = createAsyncThunk("userCreate/fetchUserCreateThunk", async (body) => {
-  const response = await api.post(`/users/`, body);
+  const response = await api.post(`/users/create/`, body);
   console.log("response.data", response.data);
   return response.data;
 });
 
-  
