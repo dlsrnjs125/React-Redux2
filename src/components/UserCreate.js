@@ -1,6 +1,7 @@
 import React, { useState } from 'react'; // 🔥 useState 추가
 import {useDispatch} from 'react-redux';
 import { fetchUserCreateThunk } from '../slice/apiSlices';
+import { Input, Button, Form, message } from "antd"; // antd의 message 추가
 
 
 const UserCreate = () => {
@@ -24,42 +25,74 @@ const UserCreate = () => {
         // setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(fetchUserCreateThunk(formData));
-        setFormData({ name: "", email: "", age: "" }); // 입력값 초기화
-        };
+    const handleSubmit = async (values) => {
+      // 비동기 방식으로 form 제출
+      try {
+        // Redux dispatch
+        const resultAction = await dispatch(fetchUserCreateThunk(values));
+        
+        if (fetchUserCreateThunk.fulfilled.match(resultAction)) {
+          message.success("User created successfully!");
+          setFormData({ name: "", email: "", age: "" }); // 입력값 초기화
+        } else {
+          message.error("Failed to create user.");
+        }
+      } catch (error) {
+        message.error("An error occurred while creating the user.");
+      }
+    };
 
   return (
     <div>
-      <h2>User Create</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
+      <Form
+        name="user_create_form"
+        onFinish={handleSubmit} // onFinish로 처리
+        initialValues={formData} // initialValues로 초기값 설정
+        layout="vertical" // 레이아웃을 수직으로 설정
+      >
+        <Form.Item
+          label="Name"
           name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
+          rules={[{ required: true, message: "Please input the user's name!" }]} // 필수 입력 검증
+        >
+          <Input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="Email"
           name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
+          rules={[{ required: true, type: 'email', message: "Please input a valid email!" }]} // 이메일 형식 검증
+        >
+          <Input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="Age"
           name="age"
-          placeholder="Age"
-          value={formData.age}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Submit</button>
-      </form>
+          rules={[{ required: true, message: "Please input the user's age!" }]} // 필수 입력 검증
+        >
+          <Input
+            type="number"
+            name="age"
+            value={formData.age}
+            onChange={handleChange}
+          />
+        </Form.Item>
+
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 };

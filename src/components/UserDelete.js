@@ -1,8 +1,9 @@
-import React, { useState } from "react"; // 🔥 useState 추가
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUserDeleteThunk } from "../slice/apiSlices";
+import { Modal, Input, Button, message } from "antd"; // antd의 Modal과 message 사용
 
-const UserDelete = () => {
+const UserDelete = ({ isOpen, onRequestClose }) => {
   const [userId, setUserId] = useState(""); // 삭제할 사용자 ID 입력 필드
   const dispatch = useDispatch();
 
@@ -10,40 +11,56 @@ const UserDelete = () => {
     setUserId(e.target.value); // 입력값에 따라 userId 업데이트
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!userId) {
-      alert("사용자 ID를 입력해주세요.");
+      message.error("사용자 ID를 입력해주세요.");
       return;
     }
 
-    // 삭제 API 호출
-    dispatch(fetchUserDeleteThunk(userId))
-      .then(() => {
-        alert("사용자가 삭제되었습니다.");
+    try {
+      // 삭제 API 호출
+      const resultAction = await dispatch(fetchUserDeleteThunk(userId));
+
+      if (fetchUserDeleteThunk.fulfilled.match(resultAction)) {
+        message.success("사용자가 삭제되었습니다.");
         setUserId(""); // 입력값 초기화
-      })
-      .catch((error) => {
-        alert(`삭제 실패: ${error.message}`);
-      });
+        onRequestClose(); // 모달 닫기
+      } else {
+        message.error("사용자 삭제 실패.");
+      }
+    } catch (error) {
+      message.error(`삭제 실패: ${error.message}`);
+    }
   };
 
   return (
-    <div>
-      <h2>User Delete</h2>
+    <Modal
+      title="Delete User"
+      visible={isOpen}
+      onCancel={onRequestClose}
+      footer={null}
+      width={600}
+    >
       <form onSubmit={handleSubmit}>
-        <input
+        <Input
           type="text"
           name="userId"
           placeholder="Enter User ID to delete"
           value={userId}
           onChange={handleChange}
           required
+          style={{ marginBottom: 16 }}
         />
-        <button type="submit">Delete</button>
+        <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
+          Delete
+        </Button>
+        <Button type="default" onClick={onRequestClose}>
+          Cancel
+        </Button>
       </form>
-    </div>
+    </Modal>
   );
 };
 
