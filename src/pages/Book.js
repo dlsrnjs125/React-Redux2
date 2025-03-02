@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { Modal, Button, Input } from "antd";
 import BookList from "../components/BookList";
 import BookCreate from "../components/BookCreate";
+import BookSearch from "../components/BookSearch";
 
 const Book = () => {
   const [isCreateModalVisible, setCreateModalVisible] = useState(false);
+  const [isSearchModalVisible, setSearchModalVisible] = useState(false);
 
   const showCreateModal = () => setCreateModalVisible(true);
+  const showSearchModal = () => setSearchModalVisible(true);
 
   const handleCreateCancel = () => setCreateModalVisible(false);
+  const handleSearchCancel = () => setSearchModalVisible(false);
 
   return (
     <>
@@ -18,6 +22,9 @@ const Book = () => {
       <div className="absolute top-5 left-5 space-x-4">
         <Button type="primary" onClick={showCreateModal} style={{ marginRight: 16 }}>
           Create Book
+        </Button>
+        <Button type="default" onClick={showSearchModal} style={{ marginRight: 16 }}>
+          Search Book
         </Button>
       </div>
 
@@ -34,6 +41,17 @@ const Book = () => {
           width={600}
         >
           <BookCreate />
+        </Modal>
+
+        {/* BookSearch 모달 */}
+        <Modal
+          title="Search Book"
+          visible={isSearchModalVisible}
+          onCancel={handleSearchCancel}
+          footer={null}
+          width={600}
+        >
+          <BookSearch/>
         </Modal>
 
       </div>

@@ -5,6 +5,7 @@ import userList from "../service/userService";
 import bookList from "../service/bookService"
 import orderList from "../service/orderService"
 import userSearch from "../service/userSearchService"
+import bookSearch from "../service/bookSearchService"
 import userDelete from "../service/userDeleteService";
 
 
@@ -16,6 +17,7 @@ const store = configureStore({
         userCreate,
         bookCreate,
         userSearch,
+        bookSearch,
         userDelete,
     },
   });

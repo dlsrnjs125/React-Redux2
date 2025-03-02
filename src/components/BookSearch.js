@@ -1,29 +1,31 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserSearchThunk } from "../slice/apiSlices";
+import { fetchBookSearchThunk } from "../slice/apiSlices";
 import { Input, Button, Table, Select } from "antd";
 
 const { Option } = Select;
 
-const UserSearch = () => {
+const BookSearch = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [searchField, setSearchField] = useState("name"); // 기본 검색 필드는 name
+  const [searchField, setSearchField] = useState("title"); // 기본 검색 필드는 제목(title)
   const dispatch = useDispatch();
-  const { userSearch } = useSelector((state) => state.userSearch);
+  const { bookSearch } = useSelector((state) => state.bookSearch);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!searchValue.trim()) return; // 빈 값 검색 방지
+    if (!searchValue.trim()) return; // 빈 값이면 검색 실행 안 함
 
     const searchParams = { searchField, searchValue };
-    dispatch(fetchUserSearchThunk(searchParams));
+    dispatch(fetchBookSearchThunk(searchParams));
   };
 
   const columns = [
     { title: "ID", dataIndex: "id", key: "id" },
-    { title: "Name", dataIndex: "name", key: "name" },
-    { title: "Email", dataIndex: "email", key: "email" },
-    { title: "Age", dataIndex: "age", key: "age" },
+    { title: "Title", dataIndex: "title", key: "title" },
+    { title: "Author", dataIndex: "author", key: "author" },
+    { title: "Publisher", dataIndex: "publisher", key: "publisher" },
+    { title: "Price", dataIndex: "price", key: "price" },
+    { title: "Stock", dataIndex: "stock", key: "stock" },
   ];
 
   return (
@@ -33,9 +35,10 @@ const UserSearch = () => {
         onChange={(value) => setSearchField(value)}
         style={{ width: 150, marginRight: 10 }}
       >
-        <Option value="name">Name</Option>
-        <Option value="email">Email</Option>
-        <Option value="age">Age (Above)</Option>
+        <Option value="title">Title</Option>
+        <Option value="author">Author</Option>
+        <Option value="publisher">Publisher</Option>
+        <Option value="price">Price (Above)</Option>
       </Select>
 
       <Input
@@ -51,7 +54,7 @@ const UserSearch = () => {
       </Button>
 
       <Table
-        dataSource={userSearch}
+        dataSource={bookSearch}
         columns={columns}
         rowKey="id"
         pagination={{ pageSize: 10 }}
@@ -61,4 +64,4 @@ const UserSearch = () => {
   );
 };
 
-export default UserSearch;
+export default BookSearch;

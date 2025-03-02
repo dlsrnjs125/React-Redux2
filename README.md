@@ -24,6 +24,9 @@ BookList
 BookCreate
 - Django에서 만든 Book {title, author, publisher, price}를 입력받아 POST를 통해 데이터 생성
 
+BookSearch
+- Django에서 만든 Book {title, author, publisher, price}를 통해 search 진행(price는 검색한 가격 이상 모두 조회 조건))
+
 ## Order Page 
 OrderList
 - Django에서 만든 user_id, book_id, address, price를 get을 통해 데이터 받아온다.
