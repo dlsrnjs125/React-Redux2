@@ -61,18 +61,16 @@ export const fetchBookCreateThunk = createAsyncThunk("bookCreate/fetchBookCreate
 });
 
 
-// User name, age Search api
-export const fetchUserSearchThunk = createAsyncThunk("userSearch/fetchUserSearchThunk", async ({ searchField, searchValue }) => {
-  let response;
-    
-    if (searchField === 'age') {
-      response = await api.get(`/users/age_gte/${searchValue}/`);
-    } else {
-      response = await api.get(`/users/name/${searchValue}/`);
-    }
-  console.log("response.data", response.data);
-  return response.data;
-});
+// User name, email, age Search api
+export const fetchUserSearchThunk = createAsyncThunk(
+  "userSearch/fetchUserSearchThunk",
+  async ({ searchField, searchValue }) => {
+    const response = await api.get(`/users/search/${searchField}/${searchValue}/`);
+    console.log("response.data", response.data);
+    return response.data;
+  }
+);
+
 
 // Book title, author, publisher, price Search api
 export const fetchBookSearchThunk = createAsyncThunk(
