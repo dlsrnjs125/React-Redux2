@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userCreate from "../service/userCreateService";
+import bookCreate from "../service/bookCreateService";
 import userList from "../service/userService";
 import bookList from "../service/bookService"
 import orderList from "../service/orderService"
@@ -13,6 +14,7 @@ const store = configureStore({
         bookList,
         orderList,
         userCreate,
+        bookCreate,
         userSearch,
         userDelete,
     },

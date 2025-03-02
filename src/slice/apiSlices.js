@@ -53,6 +53,12 @@ export const fetchUserCreateThunk = createAsyncThunk("userCreate/fetchUserCreate
   return response.data;
 });
 
+// Book Create api
+export const fetchBookCreateThunk = createAsyncThunk("bookCreate/fetchBookCreateThunk", async (body) => {
+  const response = await api.post(`/books/create/`, body);
+  console.log("response.data", response.data);
+  return response.data;
+});
 
 
 // User name Search api
