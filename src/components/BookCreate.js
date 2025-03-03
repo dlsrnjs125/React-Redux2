@@ -1,10 +1,10 @@
 import React, { useState } from 'react'; // 🔥 useState 추가
 import {useDispatch} from 'react-redux';
 import { fetchBookCreateThunk } from '../slice/apiSlices';
-import { Input, Button, Form, message } from "antd"; // antd의 message 추가
+import { Modal, Input, Button, Form, message } from "antd"; // antd의 message 추가
 
 
-const BookCreate = () => {
+const BookCreate = ({ isOpen, onRequestClose }) => {
     const [formData, setFormData] = useState({
         title: "",
         author: "",
@@ -36,6 +36,7 @@ const BookCreate = () => {
         if (fetchBookCreateThunk.fulfilled.match(resultAction)) {
           message.success("Book created successfully!");
           setFormData({ name: "", email: "", age: "" }); // 입력값 초기화
+          onRequestClose(); // 성공적으로 생성된 후 모달 닫기
         } else {
           message.error("Failed to create book.");
         }
@@ -45,7 +46,13 @@ const BookCreate = () => {
     };
 
   return (
-    <div>
+    <Modal
+      title="Create Book"
+      visible={isOpen}
+      onCancel={onRequestClose}
+      footer={null}
+      width={600}
+    >
       <Form
         name="book_create_form"
         onFinish={handleSubmit} // onFinish로 처리
@@ -117,11 +124,14 @@ const BookCreate = () => {
           />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
           Submit
         </Button>
+        <Button type="default" onClick={onRequestClose}>
+            Cancel
+        </Button>
       </Form>
-    </div>
+      </Modal>
   );
 };
 

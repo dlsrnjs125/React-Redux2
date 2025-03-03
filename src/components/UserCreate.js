@@ -1,10 +1,10 @@
 import React, { useState } from 'react'; // 🔥 useState 추가
 import {useDispatch} from 'react-redux';
 import { fetchUserCreateThunk } from '../slice/apiSlices';
-import { Input, Button, Form, message } from "antd"; // antd의 message 추가
+import { Modal, Input, Button, Form, message } from "antd"; // antd의 message 추가
 
 
-const UserCreate = () => {
+const UserCreate = ({ isOpen, onRequestClose }) => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -34,6 +34,7 @@ const UserCreate = () => {
         if (fetchUserCreateThunk.fulfilled.match(resultAction)) {
           message.success("User created successfully!");
           setFormData({ name: "", email: "", age: "" }); // 입력값 초기화
+          onRequestClose(); // 성공적으로 생성된 후 모달 닫기
         } else {
           message.error("Failed to create user.");
         }
@@ -43,7 +44,13 @@ const UserCreate = () => {
     };
 
   return (
-    <div>
+    <Modal
+          title="Create User"
+          visible={isOpen}
+          onCancel={onRequestClose}
+          footer={null}
+          width={600}
+        >
       <Form
         name="user_create_form"
         onFinish={handleSubmit} // onFinish로 처리
@@ -89,11 +96,14 @@ const UserCreate = () => {
           />
         </Form.Item>
 
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" style={{ marginRight: 8 }}>
           Submit
         </Button>
+        <Button type="default" onClick={onRequestClose}>
+            Cancel
+        </Button>
       </Form>
-    </div>
+    </Modal>
   );
 };
 

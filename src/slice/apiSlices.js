@@ -9,7 +9,7 @@ const api = axios.create({
     },
   });
 
-// User List api
+// User List API
 export const userSlice = createAsyncThunk("users/fetchUsers", async () => {
   try {
     const response = await api.get("/users/");
@@ -21,7 +21,7 @@ export const userSlice = createAsyncThunk("users/fetchUsers", async () => {
   }
 });
 
-// Book List api
+// Book List API
 export const bookSlice = createAsyncThunk("books/fetchBooks", async () => {
   try {
     const response = await api.get("/books/");
@@ -33,7 +33,7 @@ export const bookSlice = createAsyncThunk("books/fetchBooks", async () => {
   }
 });
 
-// Order List api
+// Order List API
 export const orderSlice = createAsyncThunk("orders/fetchOredrs", async () => {
   try {
     const response = await api.get("/orders/");
@@ -45,15 +45,14 @@ export const orderSlice = createAsyncThunk("orders/fetchOredrs", async () => {
   }
 });
 
-
-// User Create api
+// User Create API
 export const fetchUserCreateThunk = createAsyncThunk("userCreate/fetchUserCreateThunk", async (body) => {
   const response = await api.post(`/users/create/`, body);
   console.log("response.data", response.data);
   return response.data;
 });
 
-// Book Create api
+// Book Create API
 export const fetchBookCreateThunk = createAsyncThunk("bookCreate/fetchBookCreateThunk", async (body) => {
   const response = await api.post(`/books/create/`, body);
   console.log("response.data", response.data);
@@ -61,7 +60,7 @@ export const fetchBookCreateThunk = createAsyncThunk("bookCreate/fetchBookCreate
 });
 
 
-// User name, email, age Search api
+// User name, email, age Search API
 export const fetchUserSearchThunk = createAsyncThunk(
   "userSearch/fetchUserSearchThunk",
   async ({ searchField, searchValue }) => {
@@ -71,8 +70,7 @@ export const fetchUserSearchThunk = createAsyncThunk(
   }
 );
 
-
-// Book title, author, publisher, price Search api
+// Book title, author, publisher, price Search API
 export const fetchBookSearchThunk = createAsyncThunk(
   "bookSearch/fetchBookSearchThunk",
   async ({ searchField, searchValue }) => {
@@ -93,6 +91,21 @@ export const fetchUserDeleteThunk = createAsyncThunk(
     } catch (error) {
       console.error("Error deleting user:", error);
       return rejectWithValue(error.response?.data || "Failed to delete user");
+    }
+  }
+);
+
+// Book Delete API
+export const fetchBookDeleteThunk = createAsyncThunk(
+  "bookDelete/fetchBookDeleteThunk",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.delete(`/books/delete/${id}/`);
+      console.log("Book deleted:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting book:", error);
+      return rejectWithValue(error.response?.data || "Failed to delete book");
     }
   }
 );

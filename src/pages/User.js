@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, Input } from "antd";
+import { Modal, Button } from "antd";
 import UserCreate from "../components/UserCreate";
 import UserList from "../components/UserList";
 import UserSearch from "../components/UserSearch";
@@ -41,15 +41,12 @@ const User = () => {
 
 
         {/* UserCreate 모달 */}
-        <Modal
-          title="Create User"
-          visible={isCreateModalVisible}
-          onCancel={handleCreateCancel}
+        <UserCreate
+          isOpen={isCreateModalVisible}
+          onRequestClose={handleCreateCancel}
           footer={null}
           width={600}
-        >
-          <UserCreate />
-        </Modal>
+        />
 
         {/* UserSearch 모달 */}
         <Modal

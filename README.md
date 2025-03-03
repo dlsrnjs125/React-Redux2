@@ -12,7 +12,7 @@ UserCreate
 - Django에서 만든 User {name, email, age}를 입력받아 POST를 통해 데이터 생성
 
 UserSearch
-- User {name, age}를 통해 search 진행(age는 검색한 나이 이상 모두 조회 조건)
+- User {name, email, age}를 통해 search 진행(age는 검색한 나이 이상 모두 조회 조건)
 
 UserDelete
 - user_id를 통해서 User의 정보를 삭제
@@ -25,7 +25,10 @@ BookCreate
 - Django에서 만든 Book {title, author, publisher, price}를 입력받아 POST를 통해 데이터 생성
 
 BookSearch
-- Django에서 만든 Book {title, author, publisher, price}를 통해 search 진행(price는 검색한 가격 이상 모두 조회 조건))
+- Django에서 만든 Book {title, author, publisher, price}를 통해 search 진행(price는 검색한 가격 이상 모두 조회 조건)
+
+BookDelete
+- Book_id를 통해서 Book의 정보를 삭제
 
 ## Order Page 
 OrderList

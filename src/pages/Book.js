@@ -1,18 +1,22 @@
 import React, { useState } from "react";
-import { Modal, Button, Input } from "antd";
+import { Modal, Button } from "antd";
 import BookList from "../components/BookList";
 import BookCreate from "../components/BookCreate";
 import BookSearch from "../components/BookSearch";
+import BookDelete from "../components/BookDelete";
 
 const Book = () => {
   const [isCreateModalVisible, setCreateModalVisible] = useState(false);
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
 
   const showCreateModal = () => setCreateModalVisible(true);
   const showSearchModal = () => setSearchModalVisible(true);
+  const showDeleteModal = () => setDeleteModalVisible(true);
 
   const handleCreateCancel = () => setCreateModalVisible(false);
   const handleSearchCancel = () => setSearchModalVisible(false);
+  const handleDeleteCancel = () => setDeleteModalVisible(false);
 
   return (
     <>
@@ -26,6 +30,9 @@ const Book = () => {
         <Button type="default" onClick={showSearchModal} style={{ marginRight: 16 }}>
           Search Book
         </Button>
+        <Button type="danger" onClick={showDeleteModal}style={{ marginRight: 16 }}>
+          Delete Book
+        </Button>
       </div>
 
       {/* UserList를 가운데 정렬 */}
@@ -33,15 +40,12 @@ const Book = () => {
       </div>
 
       {/* BookCreate 모달 */}
-      <Modal
-          title="Create Book"
-          visible={isCreateModalVisible}
-          onCancel={handleCreateCancel}
+      <BookCreate
+          isOpen={isCreateModalVisible}
+          onRequestClose={handleCreateCancel}
           footer={null}
           width={600}
-        >
-          <BookCreate />
-        </Modal>
+        />
 
         {/* BookSearch 모달 */}
         <Modal
@@ -53,6 +57,14 @@ const Book = () => {
         >
           <BookSearch/>
         </Modal>
+
+        {/* UserDelete 모달 */}
+        <BookDelete
+          isOpen={isDeleteModalVisible}
+          onRequestClose={handleDeleteCancel}
+          footer={null}
+          width={600}
+        />
 
       </div>
     </>
