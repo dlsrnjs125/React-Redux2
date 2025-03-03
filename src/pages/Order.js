@@ -4,9 +4,13 @@ import OrderList from "../components/OrderList";
 const Order = () => {
   return (
     <>
-    <h2 className="text-center mt-4">Order Page</h2>
-    <div className="mt-auto p-6 bg-gray-100">
-      <OrderList/>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+    <div style={{ width: "80%", margin: "auto" }}>
+      
+
+      {/* UserList를 가운데 정렬 */}
+        <OrderList />
+      </div>
     </div>
     </>
   );

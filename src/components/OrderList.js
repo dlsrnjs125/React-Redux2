@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderSlice } from '../slice/apiSlices'; 
+import { ClientSideRowModelModule, PaginationModule, ValidationModule } from "ag-grid-community";
+import { AgGridReact } from "ag-grid-react";
 
 const OrderList = () => {
     const [orderData, setOrderData] = useState([]);
     const dispatch = useDispatch(); // slice 함수 api 실행
-    const { orders, loading } = useSelector((state) => state.orderList);     
-
+    const { orders, loading } = useSelector((state) => state.orderList);
 
     useEffect(() => {
         dispatch(orderSlice());
@@ -17,36 +18,33 @@ const OrderList = () => {
     }, [orders]);
 
     if (loading) {
-    return <p>Loading...</p>;
+        return <p>Loading...</p>;
     }
+
+    // ag-Grid 컬럼 정의 (컬럼 크기 자동 조정)
+    const columnDefs = [
+        { headerName: "ID", field: "id", sortable: true, filter: true, flex: 1 },
+        { headerName: "User ID", field: "user_id", sortable: true, filter: true, flex: 2 },
+        { headerName: "Book ID", field: "book_id", sortable: true, filter: true, flex: 2 },
+        { headerName: "Address", field: "address", sortable: true, filter: true, flex: 3 },
+        { headerName: "Price", field: "price", sortable: true, filter: true, flex: 1 },
+    ];
 
     return (
         <div>
             <h2>Order List</h2>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Book</th>
-                    <th>Address</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {orderData?.map((order) => (
-                    <tr key={order.id}>
-                        <td>{order.id}</td>
-                        <td>{order.user_id}</td>
-                        <td>{order.book_id}</td>
-                        <td>{order.address}</td>
-                        <td>{order.price}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+            <div className="ag-theme-alpine" style={{ height: '400px', width: '100%' }}>
+                <AgGridReact
+                    rowData={orderData} // 주문 데이터를 그리드에 전달
+                    columnDefs={columnDefs} // 컬럼 정의 전달
+                    pagination={true} // 페이지네이션 활성화
+                    paginationPageSize={10} // 페이지 크기를 10개로 설정
+                    domLayout="autoHeight" // 높이를 자동으로 맞추기
+                    modules={[ClientSideRowModelModule, PaginationModule, ValidationModule]} // 모듈을 지정합니다.
+                    onGridReady={(params) => params.api.sizeColumnsToFit()} // 그리드가 준비되면 컬럼 너비를 자동으로 맞추기
+                />
+            </div>
         </div>
-
     );
 }
 

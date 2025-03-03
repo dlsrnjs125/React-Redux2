@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSlice } from '../slice/apiSlices';
-import { ClientSideRowModelModule, 
-    PaginationModule, 
-    ValidationModule  } from "ag-grid-community";
+import { ClientSideRowModelModule, PaginationModule, ValidationModule  } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 
 
