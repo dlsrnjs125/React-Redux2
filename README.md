@@ -32,4 +32,7 @@ BookDelete
 
 ## Order Page 
 OrderList
-- Django에서 만든 user_id, book_id, address, price를 get을 통해 데이터 받아온다.
+- Django에서 만든 user_id, book_id, address, total_price, Creat_at를 get을 통해 데이터 받아온다.
+
+OrderSearch
+- Django에서 만든 User, Book {user_id, user_name, book_id, book_title}을 받아오고 book_price를 quantity와 계산하여 total_price를 만들고 created_atd을 받아와 search 진행

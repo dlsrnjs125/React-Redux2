@@ -26,7 +26,7 @@ const UserList = () => {
 
     // ag-Grid 컬럼 정의 (컬럼 크기 자동 조정)
   const columnDefs = [
-    { headerName: "ID", field: "id", sortable: true, filter: true, flex: 1 },
+    { headerName: "ID", field: "id", sortable: true, filter: true, flex: 0.3 },
     { headerName: "Name", field: "name", sortable: true, filter: true, flex: 2 },
     { headerName: "Email", field: "email", sortable: true, filter: true, flex: 3 },
     { headerName: "Age", field: "age", sortable: true, filter: true, flex: 1 },

@@ -80,6 +80,16 @@ export const fetchBookSearchThunk = createAsyncThunk(
   }
 );
 
+// Order user_name, book_title Search API
+export const fetchOrderSearchThunk = createAsyncThunk(
+  "orderSearch/fetchOrderSearchThunk",
+  async ({ searchField, searchValue }) => {
+    const response = await api.get(`/orders/search/${searchField}/${searchValue}/`);
+    console.log("response.data", response.data);
+    return response.data;
+  }
+);
+
 // User Delete API
 export const fetchUserDeleteThunk = createAsyncThunk(
   "userDelete/fetchUserDeleteThunk",

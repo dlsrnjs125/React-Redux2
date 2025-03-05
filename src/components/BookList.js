@@ -24,7 +24,7 @@ const BookList = () => {
     
 // ag-Grid 컬럼 정의 (컬럼 크기 자동 조정)
   const columnDefs = [
-    { headerName: "ID", field: "id", sortable: true, filter: true, flex: 1 },
+    { headerName: "ID", field: "id", sortable: true, filter: true, flex: 0.3 },
     { headerName: "Title", field: "title", sortable: true, filter: true, flex: 1 },
     { headerName: "Author", field: "author", sortable: true, filter: true, flex: 1 },
     { headerName: "Publisher", field: "publisher", sortable: true, filter: true, flex: 1 },

@@ -53,11 +53,14 @@ const OrderList = () => {
 
     // ag-Grid 컬럼 정의
     const columnDefs = [
-        { headerName: "ID", field: "id", sortable: true, filter: true, flex: 1 },
-        { headerName: "User_id", field: "user", sortable: true, filter: true, flex: 1 },
-        { headerName: "Book_id", field: "book", sortable: true, filter: true, flex: 1 },
-        { headerName: "Address", field: "address", sortable: true, filter: true, flex: 1 },
-        { headerName: "Total_Price", field: "total_price", sortable: true, filter: true, flex: 1 },
+        { headerName: "ID", field: "id", sortable: true, filter: true, flex: 0.3 },
+        { headerName: "User_id", field: "user", sortable: true, filter: true, flex: 0.5 },
+        { headerName: "User_name", field: "user_name", sortable: true, filter: true, flex: 1 },
+        { headerName: "Book_id", field: "book", sortable: true, filter: true, flex: 0.5 },
+        { headerName: "Book_title", field: "book_title", sortable: true, filter: true, flex: 1 },
+        { headerName: "Address", field: "address", sortable: true, filter: true, flex: 0.7 },
+        { headerName: "Quantity", field: "quantity", sortable: true, filter: true, flex: 0.5 },
+        { headerName: "Total_Price", field: "total_price", sortable: true, filter: true, flex: 0.7 },
         { headerName: "Create_at", field: "created_at", sortable: true, filter: true, flex: 1.5 },
     ];
 
