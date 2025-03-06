@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { Modal, Button } from "antd";
 import OrderList from "../components/OrderList";
 import OrderSearch from "../components/OrderSearch";
+import OrderCreate from "../components/OrderCreate";
 
 const Order = () => {
+  const [isCreateModalVisible, setCreateModalVisible] = useState(false);
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
 
+  const showCreateModal = () => setCreateModalVisible(true);
   const showSearchModal = () => setSearchModalVisible(true);
 
+  const handleCreateCancel = () => setCreateModalVisible(false);
   const handleSearchCancel = () => setSearchModalVisible(false);
 
 
@@ -17,6 +21,9 @@ const Order = () => {
     <div style={{ width: "80%", margin: "auto" }}>
       {/* 모달 버튼들 (왼쪽 위 정렬) */}
       <div className="absolute top-5 left-5 space-x-4">
+        <Button type="primary" onClick={showCreateModal} style={{ marginRight: 16 }}>
+          Create Order
+        </Button>
         <Button type="default" onClick={showSearchModal} style={{ marginRight: 16 }}>
           Search Order
         </Button>
@@ -26,6 +33,14 @@ const Order = () => {
       {/* UserList를 가운데 정렬 */}
         <OrderList />
       </div>
+
+      {/* UserCreate 모달 */}
+      <OrderCreate
+          isOpen={isCreateModalVisible}
+          onRequestClose={handleCreateCancel}
+          footer={null}
+          width={600}
+        />
 
       {/* BookSearch 모달 */}
       <Modal

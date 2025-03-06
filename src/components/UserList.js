@@ -9,7 +9,7 @@ import { AgGridReact } from "ag-grid-react";
 const UserList = () => {
     const [userData, setUserData] = useState([]);
     const dispatch = useDispatch(); // slice 함수 api 실행
-    const { users, loading } = useSelector((state) => state.userList);    
+    const { users, loading } = useSelector((state) => state.userList);
  
 
     useEffect(() => {

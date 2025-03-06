@@ -59,6 +59,25 @@ export const fetchBookCreateThunk = createAsyncThunk("bookCreate/fetchBookCreate
   return response.data;
 });
 
+// Order Create API
+export const fetchOrderCreateThunk = createAsyncThunk("orderCreate/fetchOrderCreateThunk", async (body) => {
+  const response = await api.post(`/orders/create/`, body);
+  console.log("response.data", response.data);
+  return response.data;
+});
+
+export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
+  const response = await api.get('/users/'); // 실제 API 엔드포인트 확인 필요
+  console.log("fetchUsers response", response);  // 응답 로그 추가
+  return response.data;
+});
+
+export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
+  const response = await api.get('/books/'); // 실제 API 엔드포인트 확인 필요
+  console.log("fetchBooks response", response);  // 응답 로그 추가
+  return response.data;
+});
+
 
 // User name, email, age Search API
 export const fetchUserSearchThunk = createAsyncThunk(

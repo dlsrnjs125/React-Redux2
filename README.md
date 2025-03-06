@@ -36,3 +36,6 @@ OrderList
 
 OrderSearch
 - Django에서 만든 User, Book {user_id, user_name, book_id, book_title}을 받아오고 book_price를 quantity와 계산하여 total_price를 만들고 created_atd을 받아와 search 진행
+
+OrderCreate
+- user_name을 선택할 수 있고, book_title을 선택할 수 있다. book을 선택하게 되면 자동으로 책의 가격을 받아와 Quantity(수량)을 입력해주면 자동으로 Total_price가 계산이 된다. 또한 Creat를 하게 될때 자동으로 현재 시각이 저장되어 주문을 한 시각이 저장된다.
