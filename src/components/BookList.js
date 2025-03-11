@@ -43,7 +43,7 @@ const BookList = () => {
             paginationPageSize={10} // 페이지 크기를 10개로 설정
             domLayout="autoHeight" // 높이를 자동으로 맞추기
             modules={[ClientSideRowModelModule, PaginationModule]} // 모듈을 지정합니다.
-            onGridReady={(params) => params.api.sizeColumnsToFit()} // 그리드가 준비되면 컬럼 너비를 자동으로 맞추기
+            // onGridReady={(params) => params.api.sizeColumnsToFit()} // 그리드가 준비되면 컬럼 너비를 자동으로 맞추기
         />
       </div>
 
