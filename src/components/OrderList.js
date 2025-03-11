@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderSlice } from '../slice/apiSlices';
-import { ClientSideRowModelModule, PaginationModule, ValidationModule } from "ag-grid-community";
+import { ClientSideRowModelModule, PaginationModule } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 
 // 날짜 포맷 함수 (ISO 8601을 사람이 읽을 수 있는 형식으로 변환)
@@ -74,7 +74,7 @@ const OrderList = () => {
                     pagination={true} // 페이지네이션 활성화
                     paginationPageSize={10} // 페이지 크기를 10개로 설정
                     domLayout="autoHeight" // 높이를 자동으로 맞추기
-                    modules={[ClientSideRowModelModule, PaginationModule, ValidationModule]} // 모듈을 지정합니다.
+                    modules={[ClientSideRowModelModule, PaginationModule]} // 모듈을 지정합니다.
                     onGridReady={(params) => params.api.sizeColumnsToFit()} // 그리드가 준비되면 컬럼 너비를 자동으로 맞추기
                 />
             </div>

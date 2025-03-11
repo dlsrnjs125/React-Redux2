@@ -4,19 +4,15 @@ import { fetchUsers, fetchBooks, fetchOrderCreateThunk } from '../slice/apiSlice
 import { Modal, Input, Button, Form, Select, message, Spin } from "antd";
 import { ModuleRegistry } from 'ag-grid-community';
 import { TextFilterModule, NumberFilterModule, DateFilterModule, CustomFilterModule, ColumnAutoSizeModule } from 'ag-grid-community';
-import { SetFilterModule, MultiFilterModule, GroupFilterModule } from 'ag-grid-enterprise';
 
 // ColumnAutoSizeModule을 등록합니다.
 ModuleRegistry.registerModules([ColumnAutoSizeModule]);
 
-// 필요한 모듈들을 등록합니다.
+// 'ag-grid-enterprise' 모듈 제거
 ModuleRegistry.registerModules([
   TextFilterModule,
   NumberFilterModule,
   DateFilterModule,
-  SetFilterModule,
-  MultiFilterModule,
-  GroupFilterModule,
   CustomFilterModule
 ]);
 
